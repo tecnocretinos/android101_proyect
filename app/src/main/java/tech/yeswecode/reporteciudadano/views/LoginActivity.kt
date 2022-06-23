@@ -15,14 +15,14 @@ import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private val recoverLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onResultRecovery)
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onResult)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_login)
 
-        recoverPasswordBtn.setOnClickListener {
+        signupBtn.setOnClickListener {
             this.validateLogin()
         }
 
@@ -55,7 +55,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToSignup() {
-        // TODO: Go to signup and receive the data
+        val email = emailTxt.text.toString()
+        val recoveryIntent = Intent(this, SignupActivity::class.java).apply {
+            putExtra(ExtrasConstants.EMAIL, email)
+        }
+        launcher.launch(recoveryIntent)
     }
 
     private fun goToRecoverPassword() {
@@ -63,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
         val recoveryIntent = Intent(this, RecoverPasswordActivity::class.java).apply {
             putExtra(ExtrasConstants.EMAIL, email)
         }
-        recoverLauncher.launch(recoveryIntent)
+        launcher.launch(recoveryIntent)
     }
 
     private fun showMessage(message: String) {
@@ -74,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun onResultRecovery(result: ActivityResult) {
+    private fun onResult(result: ActivityResult) {
         if(result.resultCode == Activity.RESULT_OK) {
             val data = result.data
             val newEmail = data?.extras?.getString(ExtrasConstants.EMAIL)

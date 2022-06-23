@@ -14,16 +14,16 @@
         android:theme="@style/Theme.ReporteCiudadano"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".views.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".RecoverPasswordActivity"
+            android:name=".views.RecoverPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".views.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".views.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

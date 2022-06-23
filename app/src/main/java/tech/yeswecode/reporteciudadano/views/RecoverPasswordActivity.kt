@@ -1,7 +1,8 @@
-package tech.yeswecode.reporteciudadano
+package tech.yeswecode.reporteciudadano.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import tech.yeswecode.reporteciudadano.R
 
 class RecoverPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -8,7 +8,7 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-
+        supportActionBar?.hide()
         // TODO: Create the logic to navigate back with result to login or to the home
     }
 }

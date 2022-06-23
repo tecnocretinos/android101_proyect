@@ -71,7 +71,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
 
             <Button
-                android:id="@+id/recoverPasswordBtn"
+                android:id="@+id/loginBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -82,7 +82,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/recoverBtn" />
 
             <Button
-                android:id="@+id/goBackTologinBtn"
+                android:id="@+id/signupBtn"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,9 +91,9 @@
                 android:text="Crear una cuenta nueva"
                 android:textAllCaps="false"
                 android:textColor="#007F66"
-                app:layout_constraintEnd_toEndOf="@+id/recoverPasswordBtn"
-                app:layout_constraintStart_toStartOf="@+id/recoverPasswordBtn"
-                app:layout_constraintTop_toBottomOf="@+id/recoverPasswordBtn" />
+                app:layout_constraintEnd_toEndOf="@+id/loginBtn"
+                app:layout_constraintStart_toStartOf="@+id/loginBtn"
+                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -14,7 +14,7 @@ class RecoverPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recover_password)
-
+        supportActionBar?.hide()
         val emailExtra = intent.extras?.getString(ExtrasConstants.EMAIL)
         emailExtra?.let { emailTxt.setText(it) }
 

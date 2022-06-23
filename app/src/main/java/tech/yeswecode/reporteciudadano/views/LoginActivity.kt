@@ -44,8 +44,8 @@ class LoginActivity : AppCompatActivity() {
             password.isNotEmpty() &&
             password.isNotBlank()
         ) {
+            val mockUser = User(UUID.randomUUID().toString(), "Mock User", email)
             val homeIntent = Intent(this, HomeActivity::class.java).apply {
-                val mockUser = User(UUID.randomUUID().toString(), "Mock User", email)
                 putExtra(ExtrasConstants.USER, mockUser)
             }
             startActivity(homeIntent)

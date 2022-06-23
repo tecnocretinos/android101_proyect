@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/nameTxt" />
 
             <EditText
-                android:id="@+id/passwordTxt"
+                android:id="@+id/passwordSignupTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -71,34 +71,34 @@
                 app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
 
             <EditText
-                android:id="@+id/passwordTxt2"
+                android:id="@+id/repeatPasswordTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:autofillHints=""
                 android:ems="10"
-                android:hint="Contraseña"
+                android:hint="Repita la contraseña"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="@+id/emailTxt"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/emailTxt"
-                app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/passwordSignupTxt" />
 
             <Button
-                android:id="@+id/signupBtn"
+                android:id="@+id/createUserBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#FEB644"
                 android:text="Registrarme"
-                app:layout_constraintEnd_toEndOf="@+id/passwordTxt"
+                app:layout_constraintEnd_toEndOf="@+id/passwordSignupTxt"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/passwordTxt"
-                app:layout_constraintTop_toBottomOf="@+id/passwordTxt2" />
+                app:layout_constraintStart_toStartOf="@+id/passwordSignupTxt"
+                app:layout_constraintTop_toBottomOf="@+id/repeatPasswordTxt" />
 
             <Button
-                android:id="@+id/goBackTologinBtn"
+                android:id="@+id/backToLoginBtn"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,9 +107,9 @@
                 android:text="Ya tengo una cuenta"
                 android:textAllCaps="false"
                 android:textColor="#007F66"
-                app:layout_constraintEnd_toEndOf="@+id/signupBtn"
-                app:layout_constraintStart_toStartOf="@+id/signupBtn"
-                app:layout_constraintTop_toBottomOf="@+id/signupBtn" />
+                app:layout_constraintEnd_toEndOf="@+id/createUserBtn"
+                app:layout_constraintStart_toStartOf="@+id/createUserBtn"
+                app:layout_constraintTop_toBottomOf="@+id/createUserBtn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

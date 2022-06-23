@@ -22,11 +22,11 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(R.layout.activity_login)
 
-        signupBtn.setOnClickListener {
+        loginBtn.setOnClickListener {
             this.validateLogin()
         }
 
-        goBackTologinBtn.setOnClickListener {
+        signupBtn.setOnClickListener {
             this.goToSignup()
         }
 

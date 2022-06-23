@@ -4,8 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.result.ActivityResult
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.emailTxt
+import kotlinx.android.synthetic.main.activity_recover_password.*
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
 
@@ -17,7 +18,7 @@ class RecoverPasswordActivity : AppCompatActivity() {
         val emailExtra = intent.extras?.getString(ExtrasConstants.EMAIL)
         emailExtra?.let { emailTxt.setText(it) }
 
-        goBackTologinBtn.setOnClickListener {
+        recoverBackToLoginBtn.setOnClickListener {
             this.goBackToLogin()
         }
     }

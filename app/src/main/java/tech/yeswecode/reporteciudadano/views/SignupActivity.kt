@@ -9,6 +9,6 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        // TODO: Create the logic to navigate back to login or to the home
+        // TODO: Create the logic to navigate back with result to login or to the home
     }
 }

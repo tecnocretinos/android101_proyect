@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".views.ReportDetailActivity">
 
+    <TextView
+        android:id="@+id/reportDetailTitleTxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="Titulo del reporte"
+        android:textColor="#007F66"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

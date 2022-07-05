@@ -1,5 +1,6 @@
 package tech.yeswecode.reporteciudadano.models
 
+import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -10,7 +11,7 @@ class Report(val id: String,
              val latitude: Double,
              val date: Date,
              val images: ArrayList<String>
-) {
+): Serializable {
     companion object {
         fun mock() : Array<Report> {
             return arrayOf(

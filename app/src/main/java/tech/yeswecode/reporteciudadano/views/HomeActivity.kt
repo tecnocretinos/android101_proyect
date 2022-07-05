@@ -1,5 +1,6 @@
 package tech.yeswecode.reporteciudadano.views
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,8 +33,10 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
     }
 
     override fun reportSelected(selection: Report) {
-        // TODO: Navigate to ReportDetailActivity passing through the selected report
-        Log.e("ReportSelected with", selection.title)
+        val detailIntent = Intent(this, ReportDetailActivity::class.java).apply {
+            putExtra(ExtrasConstants.REPORT, selection)
+        }
+        startActivity(detailIntent)
     }
 
 

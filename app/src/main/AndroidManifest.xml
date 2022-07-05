@@ -14,7 +14,7 @@
         android:theme="@style/Theme.ReporteCiudadano"
         tools:targetApi="31">
         <activity
-            android:name=".ReportDetailActivity"
+            android:name=".views.ReportDetailActivity"
             android:exported="false" />
         <activity
             android:name=".views.HomeActivity"

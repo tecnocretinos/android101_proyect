@@ -1,12 +1,17 @@
 package tech.yeswecode.reporteciudadano.views.adapters
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.models.Report
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class ReportAdapter(private val dataSet: Array<Report>,
                     private val delegate: ReportSeeMore) :
@@ -36,15 +41,17 @@ class ReportAdapter(private val dataSet: Array<Report>,
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val report = dataSet[position]
         viewHolder.titleTxt.text = report.title
-        // TODO: Add method to format date to string
-        viewHolder.dateTxt.text = report.date.toString()
+        viewHolder.dateTxt.text = report.date.dateToString("dd-MM-yyyy")
         viewHolder.descriptionTxt.text = report.description
         viewHolder.seeMoreBtn.setOnClickListener {
             this.delegate.reportSelected(report)
         }
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+}
 
+private fun Date.dateToString(format: String): String {
+    val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
+    return dateFormatter.format(this)
 }

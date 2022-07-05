@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.models.Report
 
-class ReportAdapter(private val dataSet: Array<Report>) :
+class ReportAdapter(private val dataSet: Array<Report>,
+                    private val delegate: ReportSeeMore) :
     RecyclerView.Adapter<ReportAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -39,7 +40,7 @@ class ReportAdapter(private val dataSet: Array<Report>) :
         viewHolder.dateTxt.text = report.date.toString()
         viewHolder.descriptionTxt.text = report.description
         viewHolder.seeMoreBtn.setOnClickListener {
-            // TODO: Handle the action with delegate/interface
+            this.delegate.reportSelected(report)
         }
     }
 

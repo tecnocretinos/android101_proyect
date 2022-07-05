@@ -16,7 +16,5 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         this.user = intent.extras?.getSerializable(ExtrasConstants.USER) as? User
-
-        user?.email?.let { Log.e("USER EMAIL", it) }
     }
 }

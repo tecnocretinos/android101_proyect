@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="4dp"
+        app:contentPadding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/reportItemDateTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Titulo del reporte"
+                android:textColor="#007F66"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/reportItemTitleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha del reporte"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/reportItemDescriptionTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="Descripción del reporte con mucho texto pero en esta parte deberían a parecer solo don lineas o incluso más. Aqui deberia hacer un salto de linea y agregar puntos suspensivos."
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/reportItemSeeBtn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:backgroundTint="@android:color/transparent"
+                android:padding="0dp"
+                android:text="Ver completo"
+                android:textAllCaps="false"
+                android:textColor="#FEB644" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

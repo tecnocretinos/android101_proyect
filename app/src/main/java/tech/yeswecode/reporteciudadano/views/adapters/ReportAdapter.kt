@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class ReportAdapter(private val dataSet: Array<Report>,
+class ReportAdapter(private var dataSet: Array<Report>,
                     private val delegate: ReportSeeMore) :
     RecyclerView.Adapter<ReportAdapter.ViewHolder>() {
 
@@ -49,6 +49,11 @@ class ReportAdapter(private val dataSet: Array<Report>,
     }
 
     override fun getItemCount() = dataSet.size
+
+    fun update(reports: Array<Report>) {
+        this.dataSet = reports
+        notifyDataSetChanged()
+    }
 }
 
 private fun Date.dateToString(format: String): String {

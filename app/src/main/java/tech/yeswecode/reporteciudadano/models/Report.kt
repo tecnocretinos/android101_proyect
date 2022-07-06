@@ -13,7 +13,17 @@ class Report(val id: String,
              val images: ArrayList<String>
 ): Serializable {
     companion object {
-        fun mock() : Array<Report> {
+        fun mockOne(id: Int): Report {
+            return Report("${id}",
+                "Titulo del reporte ${id}",
+                "Descripción del reporte con mucho texto pero en esta parte deberían a parecer solo don lineas o incluso más. Aqui deberia hacer un salto de linea y agregar puntos suspensivos. Descripción del reporte con mucho texto pero en esta parte deberían a parecer solo don lineas o incluso más. Aqui deberia hacer un salto de linea y agregar puntos suspensivos.",
+                10.0,
+                10.0,
+                Date(),
+                ArrayList<String>()
+            )
+        }
+        fun mock(): Array<Report> {
             return arrayOf(
                 Report("01",
                     "Titulo del reporte 1",

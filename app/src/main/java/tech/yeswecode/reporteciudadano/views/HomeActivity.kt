@@ -1,10 +1,10 @@
 package tech.yeswecode.reporteciudadano.views
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_home.*
@@ -17,6 +17,7 @@ import tech.yeswecode.reporteciudadano.views.adapters.ReportSeeMore
 
 class HomeActivity : AppCompatActivity(), ReportSeeMore {
     private var user: User? = null
+    private var reports = Report.mock()
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: ReportAdapter
 
@@ -26,7 +27,7 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
 
         this.user = intent.extras?.getSerializable(ExtrasConstants.USER) as? User
         this.layoutManager = LinearLayoutManager(this)
-        this.adapter = ReportAdapter(Report.mock(), this)
+        this.adapter = ReportAdapter(reports, this)
 
         reportsRecycler.layoutManager = layoutManager
         reportsRecycler.adapter = adapter
@@ -39,5 +40,25 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
         startActivity(detailIntent)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_nav, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.add -> {
+                val newReport = Report.mockOne(reports.size +1)
+                reports += newReport
+                adapter.update(reports)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun append(arr: Array<Report>, element: Report): Array<Report> {
+        val list: MutableList<Report> = reports.toMutableList()
+        list.add(element)
+        return list.toTypedArray()
+    }
 }

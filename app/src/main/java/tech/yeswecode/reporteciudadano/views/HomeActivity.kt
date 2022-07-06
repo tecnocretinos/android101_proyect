@@ -36,5 +36,9 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
         Log.e("ReportSelected with", selection.title)
     }
 
-
+    /* TODO: Add a menu to the toolbar with an + action.
+        When click the + add a new mock report to the list and
+        refresh the recycler view
+            Key references: onCreateOptionsMenu, onOptionsItemSelected, notifyDataSetChanged()
+     */
 }

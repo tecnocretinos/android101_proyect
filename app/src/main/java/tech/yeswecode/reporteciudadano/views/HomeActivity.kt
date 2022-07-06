@@ -55,10 +55,4 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
         }
         return super.onOptionsItemSelected(item)
     }
-
-    private fun append(arr: Array<Report>, element: Report): Array<Report> {
-        val list: MutableList<Report> = reports.toMutableList()
-        list.add(element)
-        return list.toTypedArray()
-    }
 }

@@ -27,7 +27,6 @@
     <style name="secondaryButton" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">16dp</item>
         <item name="android:textColor">@color/green_200</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:padding">0dp</item>
@@ -36,9 +35,27 @@
     <style name="linkButton" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">16dp</item>
         <item name="android:textColor">@color/yellow_200</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="customTextView" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="hintTextColor">@color/grey_200</item>
+        <item name="android:textColor">@color/grey_700</item>
+    </style>
+
+    <style name="insideFormTextView" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">10</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="hintTextColor">@color/grey_200</item>
+        <item name="android:textColor">@color/grey_700</item>
     </style>
 </resources>

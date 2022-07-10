@@ -31,27 +31,19 @@
 
             <EditText
                 android:id="@+id/emailTxt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
+                style="@style/customTextView"
                 android:hint="Correo electrónico"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
-                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <EditText
                 android:id="@+id/passwordTxt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
+                style="@style/customTextView"
                 android:hint="Contraseña"
                 android:inputType="textPassword"
-                android:minHeight="48dp"
                 app:layout_constraintEnd_toEndOf="@+id/emailTxt"
                 app:layout_constraintStart_toStartOf="@+id/emailTxt"
                 app:layout_constraintTop_toBottomOf="@+id/emailTxt" />

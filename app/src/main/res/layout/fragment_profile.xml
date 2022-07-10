@@ -49,13 +49,9 @@
 
             <EditText
                 android:id="@+id/profileNameTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:ems="10"
+                style="@style/insideFormTextView"
                 android:hint="Nombre completo"
-                android:inputType="textPersonName"
-                android:minHeight="48dp" />
+                android:inputType="textPersonName" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,13 +63,9 @@
 
             <EditText
                 android:id="@+id/profileEmailTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:ems="10"
+                style="@style/insideFormTextView"
                 android:hint="Correo electrónico"
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp" />
+                android:inputType="textEmailAddress" />
 
         </LinearLayout>
     </LinearLayout>

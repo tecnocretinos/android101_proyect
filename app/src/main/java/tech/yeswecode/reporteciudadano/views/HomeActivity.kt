@@ -23,6 +23,7 @@ import tech.yeswecode.reporteciudadano.views.fragments.ReportsMapFragment
 
 class HomeActivity : AppCompatActivity() {
 
+    private var user: User? = null
     private lateinit var binding: ActivityHomeBinding
     private lateinit var reportsListFragment: ReportsListFragment
     private lateinit var mapFragment: ReportsMapFragment
@@ -33,9 +34,10 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        user = intent.extras?.getSerializable(ExtrasConstants.USER) as? User
         reportsListFragment = ReportsListFragment.newInstance()
         mapFragment = ReportsMapFragment.newInstance()
-        profileFragment = ProfileFragment.newInstance()
+        profileFragment = ProfileFragment.newInstance(user)
 
         binding.navigationBar.setOnItemSelectedListener {
             when(it.itemId) {

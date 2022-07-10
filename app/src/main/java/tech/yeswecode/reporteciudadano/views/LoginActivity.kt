@@ -7,8 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import kotlinx.android.synthetic.main.activity_login.*
-import tech.yeswecode.reporteciudadano.R
+import tech.yeswecode.reporteciudadano.databinding.ActivityLoginBinding
 import tech.yeswecode.reporteciudadano.models.User
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
 import java.util.*
@@ -16,28 +15,30 @@ import java.util.*
 class LoginActivity : AppCompatActivity() {
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onResult)
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        loginBtn.setOnClickListener {
+        binding.loginBtn.setOnClickListener {
             this.validateLogin()
         }
 
-        signupBtn.setOnClickListener {
+        binding.signupBtn.setOnClickListener {
             this.goToSignup()
         }
 
-        recoverBtn.setOnClickListener {
+        binding.recoverBtn.setOnClickListener {
             this.goToRecoverPassword()
         }
     }
 
     private fun validateLogin() {
-        val email = emailTxt.text.toString()
-        val password = passwordTxt.text.toString()
+        val email = binding.emailTxt.text.toString()
+        val password = binding.passwordTxt.text.toString()
 
         if(email.isNotEmpty() &&
             email.isNotBlank() &&
@@ -55,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToSignup() {
-        val email = emailTxt.text.toString()
+        val email = binding.emailTxt.text.toString()
         val recoveryIntent = Intent(this, SignupActivity::class.java).apply {
             putExtra(ExtrasConstants.EMAIL, email)
         }
@@ -63,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToRecoverPassword() {
-        val email = emailTxt.text.toString()
+        val email = binding.emailTxt.text.toString()
         val recoveryIntent = Intent(this, RecoverPasswordActivity::class.java).apply {
             putExtra(ExtrasConstants.EMAIL, email)
         }
@@ -82,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
         if(result.resultCode == Activity.RESULT_OK) {
             val data = result.data
             val newEmail = data?.extras?.getString(ExtrasConstants.EMAIL)
-            newEmail.let { emailTxt.setText(it) }
+            newEmail.let { binding.emailTxt.setText(it) }
         }
     }
 }

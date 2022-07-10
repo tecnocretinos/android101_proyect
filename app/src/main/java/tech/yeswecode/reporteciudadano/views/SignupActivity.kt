@@ -5,31 +5,30 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.emailTxt
-import kotlinx.android.synthetic.main.activity_login.signupBtn
-import kotlinx.android.synthetic.main.activity_signup.*
-import tech.yeswecode.reporteciudadano.R
+import tech.yeswecode.reporteciudadano.databinding.ActivitySignupBinding
 import tech.yeswecode.reporteciudadano.models.User
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
 import java.util.*
 
 class SignupActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySignupBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        binding = ActivitySignupBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.hide()
         this.handleEmailExtra()
-        createUserBtn.setOnClickListener {
+        binding.createUserBtn.setOnClickListener {
             this.goToHome()
         }
     }
 
     private fun goToHome() {
-        val name = nameTxt.text.toString()
-        val email = emailTxt.text.toString()
-        val password = passwordSignupTxt.text.toString()
-        val repeatPassword = repeatPasswordTxt.text.toString()
+        val name = binding.nameTxt.text.toString()
+        val email = binding.emailTxt.text.toString()
+        val password = binding.passwordSignupTxt.text.toString()
+        val repeatPassword = binding.repeatPasswordTxt.text.toString()
 
         if(name.isNotEmpty() && name.isNotBlank() &&
             email.isNotEmpty() && email.isNotBlank() &&
@@ -53,14 +52,14 @@ class SignupActivity : AppCompatActivity() {
 
     private fun handleEmailExtra() {
         val emailExtra = intent.extras?.getString(ExtrasConstants.EMAIL)
-        emailExtra?.let { emailTxt.setText(it) }
-        backToLoginBtn.setOnClickListener {
+        emailExtra?.let { binding.emailTxt.setText(it) }
+        binding.backToLoginBtn.setOnClickListener {
             this.goBackToLogin()
         }
     }
 
     private fun goBackToLogin() {
-        val email = emailTxt.text.toString()
+        val email = binding.emailTxt.text.toString()
         val intent = Intent().apply {
             putExtra(ExtrasConstants.EMAIL, email)
         }

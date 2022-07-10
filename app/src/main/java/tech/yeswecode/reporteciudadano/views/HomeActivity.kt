@@ -7,8 +7,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_home.*
 import tech.yeswecode.reporteciudadano.R
+import tech.yeswecode.reporteciudadano.databinding.ActivityHomeBinding
 import tech.yeswecode.reporteciudadano.models.Report
 import tech.yeswecode.reporteciudadano.models.User
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
@@ -20,17 +20,19 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
     private var reports = Report.mock()
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: ReportAdapter
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         this.user = intent.extras?.getSerializable(ExtrasConstants.USER) as? User
         this.layoutManager = LinearLayoutManager(this)
         this.adapter = ReportAdapter(reports, this)
 
-        reportsRecycler.layoutManager = layoutManager
-        reportsRecycler.adapter = adapter
+        binding.reportsRecycler.layoutManager = layoutManager
+        binding.reportsRecycler.adapter = adapter
     }
 
     override fun reportSelected(selection: Report) {

@@ -45,4 +45,9 @@ class ReportsMapFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = ReportsMapFragment()
+    }
 }

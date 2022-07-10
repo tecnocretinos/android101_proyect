@@ -14,6 +14,7 @@ class ReportsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_reports_list, container, false)
+        // TODO: Use the recycler view and mock the data
     }
 
     companion object {

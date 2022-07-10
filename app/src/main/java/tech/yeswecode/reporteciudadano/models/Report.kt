@@ -1,6 +1,7 @@
 package tech.yeswecode.reporteciudadano.models
 
 import java.io.Serializable
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -12,6 +13,11 @@ class Report(val id: String,
              val date: Date,
              val images: ArrayList<String>
 ): Serializable {
+
+    fun getDate(): String {
+        return date.dateToString("dd-MM-yyyy")
+    }
+
     companion object {
         fun mockOne(id: Int): Report {
             return Report("${id}",
@@ -84,4 +90,9 @@ class Report(val id: String,
             )
         }
     }
+}
+
+private fun Date.dateToString(format: String): String {
+    val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
+    return dateFormatter.format(this)
 }

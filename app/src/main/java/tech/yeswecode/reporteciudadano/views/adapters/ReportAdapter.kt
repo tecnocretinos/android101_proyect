@@ -41,7 +41,7 @@ class ReportAdapter(private var dataSet: Array<Report>,
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val report = dataSet[position]
         viewHolder.titleTxt.text = report.title
-        viewHolder.dateTxt.text = report.date.dateToString("dd-MM-yyyy")
+        viewHolder.dateTxt.text = report.getDate()
         viewHolder.descriptionTxt.text = report.description
         viewHolder.seeMoreBtn.setOnClickListener {
             this.delegate.reportSelected(report)
@@ -54,9 +54,4 @@ class ReportAdapter(private var dataSet: Array<Report>,
         this.dataSet = reports
         notifyDataSetChanged()
     }
-}
-
-private fun Date.dateToString(format: String): String {
-    val dateFormatter = SimpleDateFormat(format, Locale.getDefault())
-    return dateFormatter.format(this)
 }

@@ -8,16 +8,27 @@
 
     <TextView
         android:id="@+id/reportDetailTitleTxt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/title"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Titulo del reporte"
-        android:textColor="#007F66"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reportDetailDateTxt"
+        style="@style/small"
+        app:layout_constraintEnd_toEndOf="@+id/reportDetailTitleTxt"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/reportDetailTitleTxt"
+        app:layout_constraintTop_toBottomOf="@+id/reportDetailTitleTxt" />
+
+    <TextView
+        android:id="@+id/reportDetailDescriptionTxt"
+        style="@style/text"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/reportDetailDateTxt"
+        app:layout_constraintStart_toStartOf="@+id/reportDetailDateTxt"
+        app:layout_constraintTop_toBottomOf="@+id/reportDetailDateTxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

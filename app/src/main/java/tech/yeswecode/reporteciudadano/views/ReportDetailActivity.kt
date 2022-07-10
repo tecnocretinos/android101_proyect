@@ -16,6 +16,10 @@ class ReportDetailActivity : AppCompatActivity() {
         binding = ActivityReportDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         this.report = intent.extras?.getSerializable(ExtrasConstants.REPORT) as? Report
-        this.report?.let { binding.reportDetailTitleTxt.text = it.title }
+        this.report?.let {
+            binding.reportDetailTitleTxt.text = it.title
+            binding.reportDetailDateTxt.text = it.getDate()
+            binding.reportDetailDescriptionTxt.text = it.description
+        }
     }
 }

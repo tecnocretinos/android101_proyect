@@ -23,6 +23,7 @@ import tech.yeswecode.reporteciudadano.views.fragments.ReportsMapFragment
 
 class HomeActivity : AppCompatActivity(), ReportSeeMore {
 
+    private var reports = Report.mock()
     private var user: User? = null
     private lateinit var binding: ActivityHomeBinding
     private lateinit var reportsListFragment: ReportsListFragment
@@ -66,7 +67,9 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.add -> {
-                // TODO: Mock a new report added to the ReportsListFragment
+                val newReport = Report.mockOne(reports.size +1)
+                reports += newReport
+                reportsListFragment.updateList(reports)
             }
         }
         return super.onOptionsItemSelected(item)

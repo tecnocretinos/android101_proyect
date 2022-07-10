@@ -18,10 +18,10 @@ class ReportsListFragment : Fragment() {
 
     private var _binding: FragmentReportsListBinding? = null
     private val binding get() = _binding!!
-    private var reports = Report.mock()
+
     private lateinit var layoutManager: LayoutManager
     private lateinit var adapter: ReportAdapter
-
+    private var reports = Report.mock()
     var listener: ReportSeeMore? = null
 
     override fun onCreateView(
@@ -33,8 +33,14 @@ class ReportsListFragment : Fragment() {
         adapter = ReportAdapter(reports, listener!!)
         binding.reportsRecyclerView.layoutManager = layoutManager
         binding.reportsRecyclerView.adapter = adapter
-        // TODO: Use the data as parameters from the home activity: show and update the list
         return binding.root
+    }
+
+    fun updateList(newList: Array<Report>) {
+        reports = newList
+        _binding?.let {
+            adapter.update(reports)
+        }
     }
 
     override fun onDestroy() {

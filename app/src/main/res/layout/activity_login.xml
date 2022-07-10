@@ -32,7 +32,7 @@
             <EditText
                 android:id="@+id/emailTxt"
                 style="@style/customTextView"
-                android:hint="Correo electrónico"
+                android:hint="@string/email"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -42,7 +42,7 @@
             <EditText
                 android:id="@+id/passwordTxt"
                 style="@style/customTextView"
-                android:hint="Contraseña"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="@+id/emailTxt"
                 app:layout_constraintStart_toStartOf="@+id/emailTxt"
@@ -51,14 +51,14 @@
             <Button
                 android:id="@+id/recoverBtn"
                 style="@style/secondaryButton"
-                android:text="¿Olvidaste tu contraseña?"
+                android:text="@string/recover_password"
                 app:layout_constraintEnd_toEndOf="@+id/passwordTxt"
                 app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
 
             <Button
                 android:id="@+id/loginBtn"
                 style="@style/primaryButton"
-                android:text="Iniciar sesión"
+                android:text="@string/login"
                 app:layout_constraintEnd_toEndOf="@+id/passwordTxt"
                 app:layout_constraintStart_toStartOf="@+id/passwordTxt"
                 app:layout_constraintTop_toBottomOf="@+id/recoverBtn" />
@@ -66,7 +66,7 @@
             <Button
                 android:id="@+id/signupBtn"
                 style="@style/secondaryButton"
-                android:text="Crear una cuenta nueva"
+                android:text="@string/create_new_account"
                 app:layout_constraintEnd_toEndOf="@+id/loginBtn"
                 app:layout_constraintStart_toStartOf="@+id/loginBtn"
                 app:layout_constraintTop_toBottomOf="@+id/loginBtn" />

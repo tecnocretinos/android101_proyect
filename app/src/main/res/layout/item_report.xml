@@ -56,7 +56,7 @@
                 android:id="@+id/reportItemSeeBtn"
                 style="@style/linkButton"
                 android:layout_gravity="right"
-                android:text="Ver completo" />
+                android:text="@string/watch_more" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

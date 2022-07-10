@@ -43,28 +43,28 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre completo"
+                android:text="@string/name"
                 android:textColor="#A1A0A2"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/profileNameTxt"
                 style="@style/insideFormTextView"
-                android:hint="Nombre completo"
+                android:hint="@string/name"
                 android:inputType="textPersonName" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
-                android:text="Correo electrónico"
+                android:text="@string/email"
                 android:textColor="#A1A0A2"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/profileEmailTxt"
                 style="@style/insideFormTextView"
-                android:hint="Correo electrónico"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
 
         </LinearLayout>
@@ -73,7 +73,7 @@
     <Button
         android:id="@+id/profileChangePasswordBtn"
         style="@style/primaryButton"
-        android:text="Cambiar contraseña"
+        android:text="@string/change_password"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />

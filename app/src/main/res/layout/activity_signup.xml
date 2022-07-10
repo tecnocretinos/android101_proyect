@@ -32,7 +32,7 @@
             <EditText
                 android:id="@+id/nameTxt"
                 style="@style/customTextView"
-                android:hint="Nombre completo"
+                android:hint="@string/name"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
@@ -41,7 +41,7 @@
             <EditText
                 android:id="@+id/emailTxt"
                 style="@style/customTextView"
-                android:hint="Correo electrónico"
+                android:hint="@string/email"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -51,7 +51,7 @@
             <EditText
                 android:id="@+id/passwordSignupTxt"
                 style="@style/customTextView"
-                android:hint="Contraseña"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="@+id/emailTxt"
                 app:layout_constraintStart_toStartOf="@+id/emailTxt"
@@ -60,7 +60,7 @@
             <EditText
                 android:id="@+id/repeatPasswordTxt"
                 style="@style/customTextView"
-                android:hint="Repita la contraseña"
+                android:hint="@string/repeat_password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="@+id/emailTxt"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -70,7 +70,7 @@
             <Button
                 android:id="@+id/createUserBtn"
                 style="@style/primaryButton"
-                android:text="Registrarme"
+                android:text="@string/signup"
                 app:layout_constraintEnd_toEndOf="@+id/passwordSignupTxt"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/passwordSignupTxt"
@@ -79,7 +79,7 @@
             <Button
                 android:id="@+id/backToLoginBtn"
                 style="@style/secondaryButton"
-                android:text="Ya tengo una cuenta"
+                android:text="@string/already_have_an_account"
                 app:layout_constraintEnd_toEndOf="@+id/createUserBtn"
                 app:layout_constraintStart_toStartOf="@+id/createUserBtn"
                 app:layout_constraintTop_toBottomOf="@+id/createUserBtn" />

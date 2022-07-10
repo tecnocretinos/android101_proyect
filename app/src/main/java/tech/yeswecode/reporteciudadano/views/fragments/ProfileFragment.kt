@@ -31,6 +31,8 @@ class ProfileFragment : Fragment() {
             binding.profileNameTxt.setText(it.name)
             binding.profileEmailTxt.setText(it.email)
         }
+        binding.profileNameTxt.isEnabled = false
+        binding.profileEmailTxt.isEnabled = false
         return binding.root
     }
 

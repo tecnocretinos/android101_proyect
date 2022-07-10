@@ -54,15 +54,9 @@
 
             <Button
                 android:id="@+id/reportItemSeeBtn"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/linkButton"
                 android:layout_gravity="right"
-                android:backgroundTint="@android:color/transparent"
-                android:padding="0dp"
-                android:text="Ver completo"
-                android:textAllCaps="false"
-                android:textColor="#FEB644" />
+                android:text="Ver completo" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

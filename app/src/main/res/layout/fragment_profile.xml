@@ -80,10 +80,7 @@
 
     <Button
         android:id="@+id/profileChangePasswordBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#FEB644"
+        style="@style/primaryButton"
         android:text="Cambiar contraseña"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"

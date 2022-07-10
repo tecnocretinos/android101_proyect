@@ -5,7 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.19599151611328122" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30101477581521746" />
         <entry key="app/src/main/res/layout/activity_recover_password.xml" value="0.2978424735691236" />
         <entry key="app/src/main/res/layout/activity_report_detail.xml" value="0.16675075681130172" />

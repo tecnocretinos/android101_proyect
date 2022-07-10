@@ -15,31 +15,14 @@ import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
 import tech.yeswecode.reporteciudadano.views.adapters.ReportAdapter
 import tech.yeswecode.reporteciudadano.views.adapters.ReportSeeMore
 
-class HomeActivity : AppCompatActivity(), ReportSeeMore {
-    private var user: User? = null
-    private var reports = Report.mock()
-    private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var adapter: ReportAdapter
+class HomeActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        this.user = intent.extras?.getSerializable(ExtrasConstants.USER) as? User
-        this.layoutManager = LinearLayoutManager(this)
-        this.adapter = ReportAdapter(reports, this)
-
-        binding.reportsRecycler.layoutManager = layoutManager
-        binding.reportsRecycler.adapter = adapter
-    }
-
-    override fun reportSelected(selection: Report) {
-        val detailIntent = Intent(this, ReportDetailActivity::class.java).apply {
-            putExtra(ExtrasConstants.REPORT, selection)
-        }
-        startActivity(detailIntent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,9 +33,7 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.add -> {
-                val newReport = Report.mockOne(reports.size +1)
-                reports += newReport
-                adapter.update(reports)
+                // TODO: Go to the create new report view
             }
         }
         return super.onOptionsItemSelected(item)

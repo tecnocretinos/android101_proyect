@@ -21,7 +21,7 @@ import tech.yeswecode.reporteciudadano.views.fragments.ProfileFragment
 import tech.yeswecode.reporteciudadano.views.fragments.ReportsListFragment
 import tech.yeswecode.reporteciudadano.views.fragments.ReportsMapFragment
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), ReportSeeMore {
 
     private var user: User? = null
     private lateinit var binding: ActivityHomeBinding
@@ -36,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
 
         user = intent.extras?.getSerializable(ExtrasConstants.USER) as? User
         reportsListFragment = ReportsListFragment.newInstance()
+        reportsListFragment.listener = this
         mapFragment = ReportsMapFragment.newInstance()
         profileFragment = ProfileFragment.newInstance(user)
 
@@ -48,6 +49,13 @@ class HomeActivity : AppCompatActivity() {
             true
         }
         binding.navigationBar.selectedItemId = R.id.map
+    }
+
+    override fun reportSelected(selection: Report) {
+        val detailIntent = Intent(this, ReportDetailActivity::class.java).apply {
+            putExtra(ExtrasConstants.REPORT, selection)
+        }
+        startActivity(detailIntent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

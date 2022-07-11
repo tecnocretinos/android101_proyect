@@ -41,11 +41,8 @@
             android:paddingLeft="16dp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:textColor="#A1A0A2"
-                android:textStyle="bold" />
+                style="@style/label"
+                android:text="@string/name" />
 
             <EditText
                 android:id="@+id/profileNameTxt"
@@ -54,12 +51,9 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/label"
                 android:paddingTop="16dp"
-                android:text="@string/email"
-                android:textColor="#A1A0A2"
-                android:textStyle="bold" />
+                android:text="@string/email" />
 
             <EditText
                 android:id="@+id/profileEmailTxt"

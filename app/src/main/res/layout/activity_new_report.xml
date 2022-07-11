@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.NewReportActivity">
+
+    <ScrollView
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/createReportTitleTxt"
+                style="@style/customTextView"
+                android:layout_width="match_parent"
+                android:autofillHints=""
+                android:hint="@string/report_title"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/createReportDescriptionTxt"
+                style="@style/textbox"
+                android:layout_width="match_parent"
+                android:autofillHints=""
+                android:hint="@string/description"
+                android:inputType="textMultiLine" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/addPicBtn"
+                    style="@style/secondaryButton"
+                    android:gravity="right"
+                    android:text="@string/add_picture" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/reportImg"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/location" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:background="@color/grey_200">
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/createReportBtn"
+                style="@style/primaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

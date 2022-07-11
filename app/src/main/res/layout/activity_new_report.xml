@@ -60,6 +60,7 @@
             <TextView
                 android:id="@+id/textView"
                 style="@style/label"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/location" />

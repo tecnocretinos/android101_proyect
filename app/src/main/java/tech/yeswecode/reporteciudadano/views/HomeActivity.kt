@@ -70,6 +70,8 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
                 /* TODO: Go to new report and back with the new report locally created
                         Came back with the report and update the list
                  */
+                val newReportIntent = Intent(this, NewReportActivity::class.java)
+                startActivity(newReportIntent)
             }
         }
         return super.onOptionsItemSelected(item)

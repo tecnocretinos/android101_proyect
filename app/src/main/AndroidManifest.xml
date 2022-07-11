@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="tech.yeswecode.reporteciudadano">
 
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,7 +18,7 @@
         android:theme="@style/Theme.ReporteCiudadano"
         tools:targetApi="31">
         <activity
-            android:name=".NewReportActivity"
+            android:name=".views.NewReportActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.

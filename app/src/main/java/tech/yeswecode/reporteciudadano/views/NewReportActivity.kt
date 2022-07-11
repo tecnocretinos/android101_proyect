@@ -15,7 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import tech.yeswecode.reporteciudadano.databinding.ActivityNewReportBinding
 
-class NewReportActivity : AppCompatActivity() {
+class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissionsResultCallback {
 
     private val REQUEST_PERMISSION = 100
     private var imageUri: Uri? = null
@@ -46,6 +46,7 @@ class NewReportActivity : AppCompatActivity() {
             //openCamera()
             openGallery()
         }
+        // TODO: Do something when the permisson are not gatenteed key: use onRequestPermissionsResult
         checkCameraPermission()
     }
 

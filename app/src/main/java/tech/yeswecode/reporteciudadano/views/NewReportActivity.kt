@@ -52,6 +52,11 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         }
         // TODO: Do something when the permissions are not guaranteed key: use onRequestPermissionsResult
         checkCameraPermission()
+        /* TODO: Add a new map fragment to the view, use the space of the FrameLayout <- (DONE)
+            Set a marker and camera on your position and use it for the new report lat, lng
+            You can also add an action that updates the position and merker when the user touch somewhere on the map
+            Do this stuff in the NewReportMapFragment
+         */
         showFragment(mapFragment)
     }
 

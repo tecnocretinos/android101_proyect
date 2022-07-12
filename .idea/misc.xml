@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/activity_report_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.2817963309909987" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.32708333333333334" />
+        <entry key="app/src/main/res/layout/fragment_new_report_map.xml" value="0.33695652173913043" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_reports_list.xml" value="0.34427083333333336" />
         <entry key="app/src/main/res/layout/fragment_reports_map.xml" value="0.32708333333333334" />

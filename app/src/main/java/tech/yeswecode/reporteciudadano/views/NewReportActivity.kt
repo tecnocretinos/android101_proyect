@@ -3,7 +3,6 @@ package tech.yeswecode.reporteciudadano.views
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,8 +14,10 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.ActivityNewReportBinding
+import tech.yeswecode.reporteciudadano.views.fragments.NewReportMapFragment
 
 class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -25,6 +26,7 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
 
     private var _binding: ActivityNewReportBinding? = null
     private val binding get() = _binding!!
+    private lateinit var mapFragment: NewReportMapFragment
 
     private val startCameraForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
@@ -44,16 +46,13 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         _binding = ActivityNewReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mapFragment = NewReportMapFragment.newInstance()
         binding.addPicBtn.setOnClickListener {
             showOptionsDialog()
         }
         // TODO: Do something when the permissions are not guaranteed key: use onRequestPermissionsResult
         checkCameraPermission()
-
-        /* TODO: Add a new map fragment to the view, use the space of the FrameLayout
-            Set a marker and camera on your position and use it for the new report lat, lng
-            You can also add an action that updates the position and merker when the user touch somewhere on the map
-         */
+        showFragment(mapFragment)
     }
 
     private fun checkCameraPermission() {
@@ -96,5 +95,11 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         }
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun showFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.mapFragmentContainer, fragment)
+        transaction.commit()
     }
 }

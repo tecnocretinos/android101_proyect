@@ -2,6 +2,8 @@ package tech.yeswecode.reporteciudadano.views
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,6 +15,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.ActivityNewReportBinding
 
 class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissionsResultCallback {
@@ -42,9 +45,7 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         setContentView(binding.root)
 
         binding.addPicBtn.setOnClickListener {
-            // TODO: Show dialog to choose between camera or gallery
-            //openCamera()
-            openGallery()
+            showOptionsDialog()
         }
         // TODO: Do something when the permisson are not gatenteed key: use onRequestPermissionsResult
         checkCameraPermission()
@@ -76,5 +77,19 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startGalleryForResult.launch(intent)
+    }
+
+    private fun showOptionsDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.choose_image_option))
+        val animals = arrayOf(getString(R.string.use_camera), getString(R.string.use_gallery))
+        builder.setItems(animals) { _, which ->
+            when (which) {
+                0 -> openCamera()
+                1 -> openGallery()
+            }
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 }

@@ -16,4 +16,7 @@
     <string name="add_picture">Agregar una foto</string>
     <string name="location">Ubicación</string>
     <string name="create">Crear</string>
+    <string name="choose_image_option">¿Cómo deseas subir la foto?</string>
+    <string name="use_camera">Tomar una foto</string>
+    <string name="use_gallery">Seleccionar de la galería</string>
 </resources>

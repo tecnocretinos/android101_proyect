@@ -35,6 +35,11 @@ class ReportsMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentReportsMapBinding.inflate(inflater, container, false)
+        /* TODO: Add card/cards for the selected report (see design)
+            When the user touch a marker, should place or update the info in the card
+            with the selected report.
+            When the user touch a marker, place the camera on the marker.
+         */
         return binding.root
     }
 

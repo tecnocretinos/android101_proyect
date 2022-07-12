@@ -47,8 +47,13 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         binding.addPicBtn.setOnClickListener {
             showOptionsDialog()
         }
-        // TODO: Do something when the permisson are not gatenteed key: use onRequestPermissionsResult
+        // TODO: Do something when the permissions are not guaranteed key: use onRequestPermissionsResult
         checkCameraPermission()
+
+        /* TODO: Add a new map fragment to the view, use the space of the FrameLayout
+            Set a marker and camera on your position and use it for the new report lat, lng
+            You can also add an action that updates the position and merker when the user touch somewhere on the map
+         */
     }
 
     private fun checkCameraPermission() {

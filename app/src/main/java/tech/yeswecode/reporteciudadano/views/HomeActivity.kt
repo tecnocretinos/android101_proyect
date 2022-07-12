@@ -1,11 +1,15 @@
 package tech.yeswecode.reporteciudadano.views
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +27,7 @@ import tech.yeswecode.reporteciudadano.views.fragments.ReportsMapFragment
 
 class HomeActivity : AppCompatActivity(), ReportSeeMore {
 
-    private var reports = Report.mock()
+    private val REQUEST_PERMISSION = 99
     private var user: User? = null
     private lateinit var binding: ActivityHomeBinding
     private lateinit var reportsListFragment: ReportsListFragment
@@ -50,6 +54,9 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
             true
         }
         binding.navigationBar.selectedItemId = R.id.map
+
+        // TODO: Do something when the permisson are not gatenteed key: use onRequestPermissionsResult
+        requestLocationPermission()
     }
 
     override fun reportSelected(selection: Report) {
@@ -75,6 +82,12 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun requestLocationPermission() {
+        ActivityCompat.requestPermissions(this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+            REQUEST_PERMISSION)
     }
 
     private fun showFragment(fragment: Fragment) {

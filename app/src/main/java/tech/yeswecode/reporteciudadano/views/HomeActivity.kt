@@ -43,6 +43,7 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
         reportsListFragment = ReportsListFragment.newInstance()
         reportsListFragment.listener = this
         mapFragment = ReportsMapFragment.newInstance()
+        mapFragment.listener = this
         profileFragment = ProfileFragment.newInstance(user)
 
         binding.navigationBar.setOnItemSelectedListener {

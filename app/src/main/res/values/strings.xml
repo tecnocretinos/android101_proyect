@@ -19,7 +19,4 @@
     <string name="choose_image_option">¿Cómo deseas subir la foto?</string>
     <string name="use_camera">Tomar una foto</string>
     <string name="use_gallery">Seleccionar de la galería</string>
-    <string name="title_activity_maps">MapsActivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

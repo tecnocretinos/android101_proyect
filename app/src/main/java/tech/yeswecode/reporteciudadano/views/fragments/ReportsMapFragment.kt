@@ -3,6 +3,7 @@ package tech.yeswecode.reporteciudadano.views.fragments
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,16 +19,23 @@ import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.FragmentProfileBinding
 import tech.yeswecode.reporteciudadano.databinding.FragmentReportsMapBinding
 import tech.yeswecode.reporteciudadano.models.Report
+import tech.yeswecode.reporteciudadano.views.adapters.ReportSeeMore
 
 class ReportsMapFragment : Fragment() {
 
     private val callback = OnMapReadyCallback { googleMap ->
         loadMarkers(googleMap)
+        googleMap.setOnMarkerClickListener { marker ->
+            val reportFilter = reports.indexOfFirst { it.title == marker.title }
+            reportFilter?.let { setSelectedReport(reportFilter) }
+            false
+        }
     }
 
     private var _binding: FragmentReportsMapBinding? = null
     private val binding get() = _binding!!
     private var reports = Report.mock()
+    var listener: ReportSeeMore? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +43,11 @@ class ReportsMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentReportsMapBinding.inflate(inflater, container, false)
-        /* TODO: Add card/cards for the selected report (see design)
-            When the user touch a marker, should place or update the info in the card
-            with the selected report.
-            When the user touch a marker, place the camera on the marker.
-         */
+        if(reports.isNullOrEmpty()) {
+            binding.mapReportCardView.visibility = View.GONE
+        } else {
+            setSelectedReport(0)
+        }
         return binding.root
     }
 
@@ -66,6 +74,24 @@ class ReportsMapFragment : Fragment() {
                           title: String): Marker {
         val position = LatLng(lat, lng)
         return map.addMarker(MarkerOptions().position(position).title(title))
+    }
+
+    private fun setSelectedReport(position: Int) {
+        if(reports.isNotEmpty()) {
+            setUpSelectedReportView(reports[position])
+        }
+    }
+
+    private fun setUpSelectedReportView(report: Report) {
+        if(binding.mapReportCardView.visibility == View.GONE) {
+            binding.mapReportCardView.visibility = View.VISIBLE
+        }
+        binding.reportMapItemTitleTxt.text = report.title
+        binding.reportMapItemDescriptionTxt.text = report.description
+        binding.reportMapItemDateTxt.text = report.getDate()
+        binding.reportMapItemSeeBtn.setOnClickListener {
+            listener?.reportSelected(report)
+        }
     }
 
     companion object {

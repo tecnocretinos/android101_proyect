@@ -15,7 +15,7 @@
         <entry key="app/src/main/res/layout/fragment_new_report_map.xml" value="0.33695652173913043" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_reports_list.xml" value="0.34427083333333336" />
-        <entry key="app/src/main/res/layout/fragment_reports_map.xml" value="0.32708333333333334" />
+        <entry key="app/src/main/res/layout/fragment_reports_map.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_report.xml" value="0.33" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/menu/menu_nav.xml" value="0.29907407407407405" />

@@ -22,38 +22,40 @@
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        app:cardCornerRadius="4dp"
+        android:layout_marginBottom="48dp"
         android:elevation="4dp"
+        app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
         app:contentPadding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/reportMapItemTitleTxt"
-                style="@style/title"/>
+                style="@style/title"
+                android:layout_width="match_parent" />
 
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/reportMapItemDateTxt"
-                style="@style/small"/>
+                style="@style/small"
+                android:layout_width="match_parent" />
 
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/reportMapItemDescriptionTxt"
-                style="@style/summary"/>
+                style="@style/summary"
+                android:layout_width="match_parent" />
 
             <Button
                 android:id="@+id/reportMapItemSeeBtn"
                 style="@style/linkButton"
                 android:layout_gravity="right"
+                android:minHeight="48dp"
                 android:text="@string/watch_more" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

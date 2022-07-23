@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "960574742327",
+    "project_id": "reporte-ciudadano-356103",
+    "storage_bucket": "reporte-ciudadano-356103.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960574742327:android:d295365ff13acc205b44b2",
+        "android_client_info": {
+          "package_name": "tech.yeswecode.reporteciudadano"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960574742327-dd5tkufckdtal1bp96jvbuqul9i0taee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRM0Eip3x56E15vuzQt5knQNTyX4D0Fvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960574742327-dd5tkufckdtal1bp96jvbuqul9i0taee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

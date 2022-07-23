@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.MapFragment
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.ActivityHomeBinding
 import tech.yeswecode.reporteciudadano.models.Report
@@ -33,6 +35,8 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
     private lateinit var reportsListFragment: ReportsListFragment
     private lateinit var mapFragment: ReportsMapFragment
     private lateinit var profileFragment: ProfileFragment
+
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +62,7 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
 
         // TODO: Do something when the permisson are not gatenteed key: use onRequestPermissionsResult
         requestLocationPermission()
+        testDB()
     }
 
     override fun reportSelected(selection: Report) {
@@ -89,6 +94,23 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
         ActivityCompat.requestPermissions(this,
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
             REQUEST_PERMISSION)
+    }
+
+    private fun testDB() {
+        val user = hashMapOf(
+            "first" to "Ada",
+            "last" to "Lovelace",
+            "born" to 91823018230
+        )
+        db.collection("users")
+            .document("MY NEW KEY")
+            .set(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference}")
+            }
+            .addOnFailureListener { e ->
+                Log.w("TAG", "Error adding document", e)
+            }
     }
 
     private fun showFragment(fragment: Fragment) {

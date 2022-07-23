@@ -21,7 +21,8 @@ class ReportDetailActivity : AppCompatActivity() {
             binding.reportDetailDateTxt.text = it.getDate()
             binding.reportDetailDescriptionTxt.text = it.description
         }
-        /* TODO: Add a new map fragment to the view, use the space of the FrameLayout
+        /* TODO: Add a new map fragment to the view,
+            add the space on a FrameLayout in the xml
             Set a marker and camera on the selected report position
          */
     }

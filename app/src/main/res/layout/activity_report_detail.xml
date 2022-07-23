@@ -31,4 +31,24 @@
         app:layout_constraintEnd_toEndOf="@+id/reportDetailDateTxt"
         app:layout_constraintStart_toStartOf="@+id/reportDetailDateTxt"
         app:layout_constraintTop_toBottomOf="@+id/reportDetailDateTxt" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/location"
+        app:layout_constraintEnd_toEndOf="@+id/reportDetailDescriptionTxt"
+        app:layout_constraintStart_toStartOf="@+id/reportDetailDescriptionTxt"
+        app:layout_constraintTop_toBottomOf="@+id/reportDetailDescriptionTxt" />
+
+    <FrameLayout
+        android:id="@+id/mapDetailFragmentContainer"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:background="@color/grey_200"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

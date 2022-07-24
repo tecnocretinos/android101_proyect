@@ -7,13 +7,13 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class Report(
-    val id: String,
-    val title: String,
-    val description: String,
-    val longitude: Double,
-    val latitude: Double,
-    val date: Date,
-    val images: ArrayList<String>
+    val id: String = "",
+    val title: String = "",
+    val description: String = "",
+    val longitude: Double = 0.0,
+    val latitude: Double = 0.0,
+    val date: Date = Date(),
+    val images: ArrayList<String> = ArrayList<String>()
 ): Serializable
 
 fun Date.dateToString(format: String): String {

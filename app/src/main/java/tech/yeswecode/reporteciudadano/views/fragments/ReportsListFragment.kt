@@ -59,16 +59,7 @@ class ReportsListFragment : Fragment() {
             .addOnSuccessListener { result ->
                 var reportsTemp = ArrayList<Report>()
                 for (document in result) {
-                    val data = document.data
-                    val id = data["id"] as String
-                    val title = data["title"] as String
-                    val description = data["description"] as String
-                    val longitude = data["longitude"] as Double
-                    val latitude = data["latitude"] as Double
-                    val date = data["date"] as Timestamp
-                    val images = data["images"] as ArrayList<String>
-                    val report = Report(id, title, description, longitude, latitude, date.toDate(), images)
-                    reportsTemp.add(report)
+                    reportsTemp.add(document.toObject(Report::class.java))
                 }
                 updateList(reportsTemp.toTypedArray())
             }

@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import tech.yeswecode.reporteciudadano.databinding.ActivityLoginBinding
 import tech.yeswecode.reporteciudadano.models.User
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
@@ -36,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
             this.goToRecoverPassword()
         }
 
-        NotificationUtil.showNotification(this, "TITLE", "Message")
+        Firebase.messaging.subscribeToTopic("reports")
     }
 
     private fun validateLogin() {
@@ -48,6 +50,13 @@ class LoginActivity : AppCompatActivity() {
             password.isNotEmpty() &&
             password.isNotBlank()
         ) {
+            /* TODO: Suscribe to the user id as a topic
+                in order to receive notifications just for the logged user
+
+                Note: This is not the best way, search for the fcm token
+                and how to use it to receive custom notification
+                for the user that has that token device
+            */
             val mockUser = User(UUID.randomUUID().toString(), "Mock User", email)
             val homeIntent = Intent(this, HomeActivity::class.java).apply {
                 putExtra(ExtrasConstants.USER, mockUser)

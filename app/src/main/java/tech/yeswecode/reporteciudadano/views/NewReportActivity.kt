@@ -132,6 +132,11 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
             db.collection(FirestoreConstants.REPORTS)
                 .add(report)
                 .addOnSuccessListener {
+                    /* TODO: Notify to the users suscribed to the "reports" topic
+                        Send a POST request to the fcm service (https://fcm.googleapis.com/fcm/send)
+                        notifying the new report. You can use the report title as the notification title
+                        and the report descriptions as the message
+                     */
                     onBackPressed()
                 }
                 .addOnFailureListener { e ->

@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import tech.yeswecode.reporteciudadano.databinding.ActivityLoginBinding
 import tech.yeswecode.reporteciudadano.models.User
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
+import tech.yeswecode.reporteciudadano.utilities.NotificationUtil
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
@@ -34,6 +35,8 @@ class LoginActivity : AppCompatActivity() {
         binding.recoverBtn.setOnClickListener {
             this.goToRecoverPassword()
         }
+
+        NotificationUtil.showNotification(this, "TITLE", "Message")
     }
 
     private fun validateLogin() {

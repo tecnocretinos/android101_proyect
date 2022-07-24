@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.models.Report
+import tech.yeswecode.reporteciudadano.models.dateToString
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -41,7 +42,7 @@ class ReportAdapter(private var dataSet: Array<Report>,
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val report = dataSet[position]
         viewHolder.titleTxt.text = report.title
-        viewHolder.dateTxt.text = report.getDate()
+        viewHolder.dateTxt.text = getDate(report.date)
         viewHolder.descriptionTxt.text = report.description
         viewHolder.seeMoreBtn.setOnClickListener {
             this.delegate.reportSelected(report)
@@ -53,5 +54,9 @@ class ReportAdapter(private var dataSet: Array<Report>,
     fun update(reports: Array<Report>) {
         this.dataSet = reports
         notifyDataSetChanged()
+    }
+
+    fun getDate(date: Date): String {
+        return date.dateToString("dd-MM-yyyy")
     }
 }

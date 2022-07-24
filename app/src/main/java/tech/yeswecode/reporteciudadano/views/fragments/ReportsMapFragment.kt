@@ -3,7 +3,6 @@ package tech.yeswecode.reporteciudadano.views.fragments
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +14,16 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import tech.yeswecode.reporteciudadano.R
-import tech.yeswecode.reporteciudadano.databinding.FragmentProfileBinding
 import tech.yeswecode.reporteciudadano.databinding.FragmentReportsMapBinding
 import tech.yeswecode.reporteciudadano.models.Report
+import tech.yeswecode.reporteciudadano.models.dateToString
+import tech.yeswecode.reporteciudadano.utilities.FirestoreConstants
 import tech.yeswecode.reporteciudadano.views.adapters.ReportSeeMore
+import java.util.*
 
 class ReportsMapFragment : Fragment() {
 
@@ -34,7 +38,8 @@ class ReportsMapFragment : Fragment() {
 
     private var _binding: FragmentReportsMapBinding? = null
     private val binding get() = _binding!!
-    private var reports = Report.mock()
+    private var reports: Array<Report> = arrayOf<Report>()
+    private val db = Firebase.firestore
     var listener: ReportSeeMore? = null
 
     override fun onCreateView(
@@ -43,21 +48,12 @@ class ReportsMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentReportsMapBinding.inflate(inflater, container, false)
-        /* TODO: Get the reports form firebase like in ReportsListFragment
-            Place the list in the map and the cards
-         */
-        if(reports.isNullOrEmpty()) {
-            binding.mapReportCardView.visibility = View.GONE
-        } else {
-            setSelectedReport(0)
-        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+        getReports()
     }
 
     private fun loadMarkers(map: GoogleMap) {
@@ -91,10 +87,45 @@ class ReportsMapFragment : Fragment() {
         }
         binding.reportMapItemTitleTxt.text = report.title
         binding.reportMapItemDescriptionTxt.text = report.description
-        binding.reportMapItemDateTxt.text = report.getDate()
+        binding.reportMapItemDateTxt.text = getDate(report.date)
         binding.reportMapItemSeeBtn.setOnClickListener {
             listener?.reportSelected(report)
         }
+    }
+
+    private fun getReports() {
+        db.collection(FirestoreConstants.REPORTS)
+            .get()
+            .addOnSuccessListener { result ->
+                var reportsTemp = ArrayList<Report>()
+                for (document in result) {
+                    val data = document.data
+                    val id = data["id"] as String
+                    val title = data["title"] as String
+                    val description = data["description"] as String
+                    val longitude = data["longitude"] as Double
+                    val latitude = data["latitude"] as Double
+                    val date = data["date"] as Timestamp
+                    val images = data["images"] as ArrayList<String>
+                    val report = Report(id, title, description, longitude, latitude, date.toDate(), images)
+                    reportsTemp.add(report)
+                }
+                reports = reportsTemp.toTypedArray()
+                if(reports.isNullOrEmpty()) {
+                    binding.mapReportCardView.visibility = View.GONE
+                } else {
+                    setSelectedReport(reports.size-1)
+                }
+                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+                mapFragment?.getMapAsync(callback)
+            }
+            .addOnFailureListener { exception ->
+                // TODO: Handle the error
+            }
+    }
+
+    private fun getDate(date: Date): String {
+        return date.dateToString("dd-MM-yyyy")
     }
 
     companion object {

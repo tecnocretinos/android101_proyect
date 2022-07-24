@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.ActivityReportDetailBinding
 import tech.yeswecode.reporteciudadano.models.Report
+import tech.yeswecode.reporteciudadano.models.dateToString
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
 import tech.yeswecode.reporteciudadano.views.fragments.DetailReportMapFragment
 import tech.yeswecode.reporteciudadano.views.fragments.NewReportMapFragment
+import java.util.*
 
 class ReportDetailActivity : AppCompatActivity() {
 
@@ -24,7 +26,7 @@ class ReportDetailActivity : AppCompatActivity() {
         this.report = intent.extras?.getSerializable(ExtrasConstants.REPORT) as? Report
         this.report?.let {
             binding.reportDetailTitleTxt.text = it.title
-            binding.reportDetailDateTxt.text = it.getDate()
+            binding.reportDetailDateTxt.text = getDate(it.date)
             binding.reportDetailDescriptionTxt.text = it.description
         }
         showFragment(mapFragment)
@@ -34,5 +36,9 @@ class ReportDetailActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.mapDetailFragmentContainer, fragment)
         transaction.commit()
+    }
+
+    fun getDate(date: Date): String {
+        return date.dateToString("dd-MM-yyyy")
     }
 }

@@ -15,15 +15,21 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.ActivityNewReportBinding
+import tech.yeswecode.reporteciudadano.models.Report
+import tech.yeswecode.reporteciudadano.utilities.FirestoreConstants
 import tech.yeswecode.reporteciudadano.views.fragments.NewReportMapFragment
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissionsResultCallback {
 
     private val REQUEST_PERMISSION = 100
     private var imageUri: Uri? = null
-
+    private val db = Firebase.firestore
     private var _binding: ActivityNewReportBinding? = null
     private val binding get() = _binding!!
     private lateinit var mapFragment: NewReportMapFragment
@@ -50,9 +56,9 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         binding.addPicBtn.setOnClickListener {
             showOptionsDialog()
         }
-        /* TODO: Create the report in firebase and navigate back to home
-            Handle the errors with a dialog
-         */
+        binding.createReportBtn.setOnClickListener {
+            createReport()
+        }
         // TODO: Do something when the permissions are not guaranteed key: use onRequestPermissionsResult
         checkCameraPermission()
         showFragment(mapFragment)
@@ -104,5 +110,35 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.mapFragmentContainer, fragment)
         transaction.commit()
+    }
+
+    private fun createReport() {
+        val title = binding.createReportTitleTxt.text.toString()
+        val description = binding.createReportDescriptionTxt.text.toString()
+        val image = ""
+        val imageList = ArrayList<String>()
+        imageList.add(image)
+        val longitude = 0.0
+        val latitude = 0.0
+        if(title.isNotEmpty() && title.isNotBlank() && description.isNotEmpty() && description.isNotBlank()) {
+            val report = Report(UUID.randomUUID().toString(),
+                title,
+                description,
+                longitude,
+                latitude,
+                Date(),
+                imageList
+            )
+            db.collection(FirestoreConstants.REPORTS)
+                .add(report)
+                .addOnSuccessListener {
+                    onBackPressed()
+                }
+                .addOnFailureListener { e ->
+                    // TODO: Show error
+                }
+        } else {
+            // TODO: Show error
+        }
     }
 }

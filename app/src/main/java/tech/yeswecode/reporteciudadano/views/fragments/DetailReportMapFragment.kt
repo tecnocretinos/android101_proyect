@@ -16,17 +16,32 @@ import com.google.android.gms.maps.model.MarkerOptions
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.FragmentDetailReportMapBinding
 import tech.yeswecode.reporteciudadano.databinding.FragmentNewReportMapBinding
+import tech.yeswecode.reporteciudadano.models.User
+import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
 
 class DetailReportMapFragment : Fragment() {
 
     private var _binding: FragmentDetailReportMapBinding? = null
     private val binding get() = _binding!!
+    private var longitude: Double? = null
+    private var latitude: Double? = null
 
     private val callback = OnMapReadyCallback { googleMap ->
-        // TODO: Place the marker on the report position
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        longitude?.let { lng ->
+            latitude?.let { lat ->
+                val marker = LatLng(lat, lng)
+                googleMap.addMarker(MarkerOptions().position(marker))
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 8.0f))
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            latitude = it.getDouble(ExtrasConstants.LATITUDE)
+            longitude = it.getDouble(ExtrasConstants.LONGITUDE)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -44,6 +59,13 @@ class DetailReportMapFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = DetailReportMapFragment()
+        fun newInstance(longitude: Double?, latitude: Double?) = DetailReportMapFragment().apply {
+            arguments = Bundle().apply {
+                longitude?.let {
+                    putDouble(ExtrasConstants.LONGITUDE, it) }
+                latitude?.let {
+                    putDouble(ExtrasConstants.LATITUDE, it) }
+            }
+        }
     }
 }

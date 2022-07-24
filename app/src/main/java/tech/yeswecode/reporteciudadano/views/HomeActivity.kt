@@ -68,9 +68,6 @@ class HomeActivity : AppCompatActivity(), ReportSeeMore {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.add -> {
-                /* TODO: Go to new report and back with the new report locally created
-                        Came back with the report and update the list
-                 */
                 val newReportIntent = Intent(this, NewReportActivity::class.java)
                 startActivity(newReportIntent)
             }

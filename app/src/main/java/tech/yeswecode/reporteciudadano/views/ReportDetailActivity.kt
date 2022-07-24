@@ -22,13 +22,13 @@ class ReportDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityReportDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mapFragment = DetailReportMapFragment.newInstance()
         this.report = intent.extras?.getSerializable(ExtrasConstants.REPORT) as? Report
         this.report?.let {
             binding.reportDetailTitleTxt.text = it.title
             binding.reportDetailDateTxt.text = getDate(it.date)
             binding.reportDetailDescriptionTxt.text = it.description
         }
+        mapFragment = DetailReportMapFragment.newInstance(this.report?.longitude, this.report?.latitude)
         showFragment(mapFragment)
     }
 

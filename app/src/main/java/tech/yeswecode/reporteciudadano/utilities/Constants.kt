@@ -6,3 +6,8 @@ object ExtrasConstants {
     const val REPORT = "REPORT_EXTRA"
     const val REPORTS = "REPORTS_EXTRA"
 }
+
+object FirestoreConstants {
+    const val USERS = "USERS"
+    const val REPORTS = "REPORTS"
+}

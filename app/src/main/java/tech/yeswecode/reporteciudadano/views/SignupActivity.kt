@@ -5,12 +5,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import tech.yeswecode.reporteciudadano.databinding.ActivitySignupBinding
 import tech.yeswecode.reporteciudadano.models.User
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
+import tech.yeswecode.reporteciudadano.utilities.FirestoreConstants
 import java.util.*
 
 class SignupActivity : AppCompatActivity() {
+    private val db = Firebase.firestore
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,11 +24,11 @@ class SignupActivity : AppCompatActivity() {
         supportActionBar?.hide()
         this.handleEmailExtra()
         binding.createUserBtn.setOnClickListener {
-            this.goToHome()
+            this.signup()
         }
     }
 
-    private fun goToHome() {
+    private fun signup() {
         val name = binding.nameTxt.text.toString()
         val email = binding.emailTxt.text.toString()
         val password = binding.passwordSignupTxt.text.toString()
@@ -35,13 +39,8 @@ class SignupActivity : AppCompatActivity() {
             password.isNotEmpty() && password.isNotBlank() &&
             repeatPassword.isNotEmpty() && repeatPassword.isNotBlank()) {
             if(password == repeatPassword) {
-                val user = User(UUID.randomUUID().toString(),
-                    name,
-                    email)
-                val homeIntent = Intent(this, HomeActivity::class.java).apply {
-                    putExtra(ExtrasConstants.USER, user)
-                }
-                startActivity(homeIntent)
+                val user = User(UUID.randomUUID().toString(), name, email)
+                createNewUser(user)
             } else {
                 this.showMessage("Las contraseñas no coinciden.")
             }
@@ -73,5 +72,24 @@ class SignupActivity : AppCompatActivity() {
                 message,
                 Toast.LENGTH_LONG)
             .show()
+    }
+
+    private fun createNewUser(user: User) {
+        db.collection(FirestoreConstants.USERS)
+            .document(user.id)
+            .set(user)
+            .addOnSuccessListener {
+                goToHome(user)
+            }
+            .addOnFailureListener { e ->
+                e.message?.let { showMessage(it) }
+            }
+    }
+
+    private fun goToHome(user: User) {
+        val homeIntent = Intent(this, HomeActivity::class.java).apply {
+            putExtra(ExtrasConstants.USER, user)
+        }
+        startActivity(homeIntent)
     }
 }

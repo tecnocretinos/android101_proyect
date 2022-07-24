@@ -7,12 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import tech.yeswecode.reporteciudadano.databinding.FragmentReportsListBinding
 import tech.yeswecode.reporteciudadano.models.Report
-import tech.yeswecode.reporteciudadano.models.User
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
+import tech.yeswecode.reporteciudadano.utilities.FirestoreConstants
 import tech.yeswecode.reporteciudadano.views.adapters.ReportAdapter
 import tech.yeswecode.reporteciudadano.views.adapters.ReportSeeMore
+import java.util.*
 
 class ReportsListFragment : Fragment() {
 
@@ -21,7 +25,8 @@ class ReportsListFragment : Fragment() {
 
     private lateinit var layoutManager: LayoutManager
     private lateinit var adapter: ReportAdapter
-    private var reports = Report.mock()
+    private var reports: Array<Report> = arrayOf<Report>()
+    private val db = Firebase.firestore
     var listener: ReportSeeMore? = null
 
     override fun onCreateView(
@@ -36,11 +41,40 @@ class ReportsListFragment : Fragment() {
         return binding.root
     }
 
-    fun updateList(newList: Array<Report>) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getReports()
+    }
+
+    private fun updateList(newList: Array<Report>) {
         reports = newList
         _binding?.let {
             adapter.update(reports)
         }
+    }
+
+    private fun getReports() {
+        db.collection(FirestoreConstants.REPORTS)
+            .get()
+            .addOnSuccessListener { result ->
+                var reportsTemp = ArrayList<Report>()
+                for (document in result) {
+                    val data = document.data
+                    val id = data["id"] as String
+                    val title = data["title"] as String
+                    val description = data["description"] as String
+                    val longitude = data["longitude"] as Double
+                    val latitude = data["latitude"] as Double
+                    val date = data["date"] as Timestamp
+                    val images = data["images"] as ArrayList<String>
+                    val report = Report(id, title, description, longitude, latitude, date.toDate(), images)
+                    reportsTemp.add(report)
+                }
+                updateList(reportsTemp.toTypedArray())
+            }
+            .addOnFailureListener { exception ->
+                // TODO: Handle the error
+            }
     }
 
     override fun onDestroy() {

@@ -33,6 +33,9 @@ class ProfileFragment : Fragment() {
         }
         binding.profileNameTxt.isEnabled = false
         binding.profileEmailTxt.isEnabled = false
+        /* TODO: Complete the profile features
+            Edit the profile, change password, etc
+         */
         return binding.root
     }
 

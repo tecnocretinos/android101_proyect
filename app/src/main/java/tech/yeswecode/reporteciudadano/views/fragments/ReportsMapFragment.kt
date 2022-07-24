@@ -43,6 +43,9 @@ class ReportsMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentReportsMapBinding.inflate(inflater, container, false)
+        /* TODO: Get the reports form firebase like in ReportsListFragment
+            Place the list in the map and the cards
+         */
         if(reports.isNullOrEmpty()) {
             binding.mapReportCardView.visibility = View.GONE
         } else {

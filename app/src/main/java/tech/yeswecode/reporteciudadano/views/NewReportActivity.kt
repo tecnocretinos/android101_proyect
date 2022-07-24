@@ -50,6 +50,9 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         binding.addPicBtn.setOnClickListener {
             showOptionsDialog()
         }
+        /* TODO: Create the report in firebase and navigate back to home
+            Handle the errors with a dialog
+         */
         // TODO: Do something when the permissions are not guaranteed key: use onRequestPermissionsResult
         checkCameraPermission()
         showFragment(mapFragment)

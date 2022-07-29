@@ -2,7 +2,9 @@ package tech.yeswecode.reporteciudadano.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.ActivityReportDetailBinding
 import tech.yeswecode.reporteciudadano.models.Report
@@ -30,6 +32,7 @@ class ReportDetailActivity : AppCompatActivity() {
         }
         mapFragment = DetailReportMapFragment.newInstance(this.report?.longitude, this.report?.latitude)
         showFragment(mapFragment)
+        showImage()
     }
 
     private fun showFragment(fragment: Fragment) {
@@ -38,7 +41,15 @@ class ReportDetailActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    fun getDate(date: Date): String {
+    private fun getDate(date: Date): String {
         return date.dateToString("dd-MM-yyyy")
+    }
+
+    private fun showImage() {
+        if(!this.report?.images.isNullOrEmpty()) {
+            // TODO: Refactor to show multiple images, loop the list
+            binding.reportDetailImg.visibility = View.VISIBLE
+            Glide.with(this).load(this.report!!.images[0]).into(binding.reportDetailImg);
+        }
     }
 }

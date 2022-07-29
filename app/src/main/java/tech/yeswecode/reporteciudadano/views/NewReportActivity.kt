@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import tech.yeswecode.reporteciudadano.R
 import tech.yeswecode.reporteciudadano.databinding.ActivityNewReportBinding
 import tech.yeswecode.reporteciudadano.models.Report
@@ -38,6 +39,7 @@ class NewReportActivity : AppCompatActivity(),
     private lateinit var mapFragment: NewReportMapFragment
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
+    private val storage = Firebase.storage
 
     private val startCameraForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
@@ -121,33 +123,55 @@ class NewReportActivity : AppCompatActivity(),
     private fun createReport() {
         val title = binding.createReportTitleTxt.text.toString()
         val description = binding.createReportDescriptionTxt.text.toString()
-        val image = ""
-        val imageList = ArrayList<String>()
-        imageList.add(image)
         if(title.isNotEmpty() && title.isNotBlank() && description.isNotEmpty() && description.isNotBlank()) {
-            val report = Report(UUID.randomUUID().toString(),
-                title,
-                description,
-                longitude,
-                latitude,
-                Date(),
-                imageList
-            )
-            db.collection(FirestoreConstants.REPORTS)
-                .add(report)
-                .addOnSuccessListener {
-                    /* TODO: Notify to the users suscribed to the "reports" topic
-                        Send a POST request to the fcm service (https://fcm.googleapis.com/fcm/send)
-                        notifying the new report. You can use the report title as the notification title
-                        and the report descriptions as the message
-                     */
-                    onBackPressed()
-                }
-                .addOnFailureListener { e ->
-                    // TODO: Show error
-                }
+            uploadImage { imageUrl ->
+                val imageList = ArrayList<String>()
+                imageUrl?.let { imageList.add(it) }
+                val report = Report(UUID.randomUUID().toString(),
+                    title,
+                    description,
+                    longitude,
+                    latitude,
+                    Date(),
+                    imageList
+                )
+                db.collection(FirestoreConstants.REPORTS)
+                    .add(report)
+                    .addOnSuccessListener {
+                        /* TODO: Notify to the users suscribed to the "reports" topic
+                            Send a POST request to the fcm service (https://fcm.googleapis.com/fcm/send)
+                            notifying the new report. You can use the report title as the notification title
+                            and the report descriptions as the message
+                         */
+                        onBackPressed()
+                    }
+                    .addOnFailureListener { e ->
+                        // TODO: Show error
+                    }
+            }
         } else {
             // TODO: Show error
+        }
+    }
+
+    private fun uploadImage(completion: (String?) -> Unit) {
+        if(this.imageUri != null) {
+            val storageRef = storage.reference
+            val reportRef = storageRef.child("reports/${UUID.randomUUID().toString()}.jpg")
+            val uploadTask = reportRef.putFile(imageUri!!)
+            uploadTask.addOnFailureListener {
+                completion(null)
+            }.addOnSuccessListener { taskSnapshot ->
+                reportRef.downloadUrl
+                    .addOnSuccessListener {
+                        completion(it.toString())
+                    }
+                    .addOnCanceledListener {
+                        completion(null)
+                    }
+            }
+        } else {
+            completion(null)
         }
     }
 

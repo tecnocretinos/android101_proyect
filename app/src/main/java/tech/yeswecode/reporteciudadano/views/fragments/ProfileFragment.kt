@@ -35,6 +35,8 @@ class ProfileFragment : Fragment() {
         binding.profileEmailTxt.isEnabled = false
         /* TODO: Complete the profile features
             Edit the profile, change password, etc
+            New Feature: Change the profile pic,
+            upload one and set it to the user
          */
         return binding.root
     }

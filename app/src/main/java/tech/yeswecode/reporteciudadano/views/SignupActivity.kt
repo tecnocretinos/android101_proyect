@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import tech.yeswecode.reporteciudadano.databinding.ActivitySignupBinding
@@ -15,6 +17,7 @@ import java.util.*
 
 class SignupActivity : AppCompatActivity() {
     private val db = Firebase.firestore
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +26,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
         this.handleEmailExtra()
+        auth = Firebase.auth
         binding.createUserBtn.setOnClickListener {
             this.signup()
         }
@@ -39,8 +43,7 @@ class SignupActivity : AppCompatActivity() {
             password.isNotEmpty() && password.isNotBlank() &&
             repeatPassword.isNotEmpty() && repeatPassword.isNotBlank()) {
             if(password == repeatPassword) {
-                val user = User(UUID.randomUUID().toString(), name, email)
-                createNewUser(user)
+                createAuthUser(email, name, password)
             } else {
                 this.showMessage("Las contraseñas no coinciden.")
             }
@@ -72,6 +75,20 @@ class SignupActivity : AppCompatActivity() {
                 message,
                 Toast.LENGTH_LONG)
             .show()
+    }
+
+    private fun createAuthUser(email: String, name: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    auth.currentUser?.let {
+                        val user = User(it.uid, name, email)
+                        createNewUser(user)
+                    }
+                } else {
+                    showMessage("Error with the signup")
+                }
+            }
     }
 
     private fun createNewUser(user: User) {

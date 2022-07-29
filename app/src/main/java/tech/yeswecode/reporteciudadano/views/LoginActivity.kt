@@ -7,11 +7,16 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import tech.yeswecode.reporteciudadano.databinding.ActivityLoginBinding
+import tech.yeswecode.reporteciudadano.models.Report
 import tech.yeswecode.reporteciudadano.models.User
 import tech.yeswecode.reporteciudadano.utilities.ExtrasConstants
+import tech.yeswecode.reporteciudadano.utilities.FirestoreConstants
 import tech.yeswecode.reporteciudadano.utilities.NotificationUtil
 import java.util.*
 
@@ -19,6 +24,8 @@ class LoginActivity : AppCompatActivity() {
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onResult)
     private lateinit var binding: ActivityLoginBinding
+    private val auth = Firebase.auth
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,14 +64,35 @@ class LoginActivity : AppCompatActivity() {
                 and how to use it to receive custom notification
                 for the user that has that token device
             */
-            val mockUser = User(UUID.randomUUID().toString(), "Mock User", email)
-            val homeIntent = Intent(this, HomeActivity::class.java).apply {
-                putExtra(ExtrasConstants.USER, mockUser)
-            }
-            startActivity(homeIntent)
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        auth.currentUser?.let {
+                            getUser(it.uid)
+                        }
+                    } else {
+                        showMessage("Error with the signup")
+                    }
+                }
         } else {
             this.showMessage("Por favor complete todos los campos para continuar.")
         }
+    }
+
+    private fun getUser(id: String) {
+        db.collection(FirestoreConstants.USERS)
+            .document(id)
+            .get()
+            .addOnSuccessListener {
+                val user = it.toObject(User::class.java)
+                val homeIntent = Intent(this, HomeActivity::class.java).apply {
+                    putExtra(ExtrasConstants.USER, user)
+                }
+                startActivity(homeIntent)
+            }
+            .addOnCanceledListener {
+                showMessage("User not found error")
+            }
     }
 
     private fun goToSignup() {

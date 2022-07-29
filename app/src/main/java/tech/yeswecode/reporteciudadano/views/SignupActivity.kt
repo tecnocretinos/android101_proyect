@@ -17,7 +17,7 @@ import java.util.*
 
 class SignupActivity : AppCompatActivity() {
     private val db = Firebase.firestore
-    private lateinit var auth: FirebaseAuth
+    private val auth = Firebase.auth
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,6 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
         this.handleEmailExtra()
-        auth = Firebase.auth
         binding.createUserBtn.setOnClickListener {
             this.signup()
         }

@@ -22,6 +22,10 @@ class RecoverPasswordActivity : AppCompatActivity() {
         binding.recoverBackToLoginBtn.setOnClickListener {
             this.goBackToLogin()
         }
+
+        binding.recoverPasswordBtn.setOnClickListener {
+            // TODO: Recover password with firebase auth
+        }
     }
 
     private fun goBackToLogin() {

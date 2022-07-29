@@ -11,4 +11,5 @@ object ExtrasConstants {
 object FirestoreConstants {
     const val USERS = "USERS"
     const val REPORTS = "REPORTS"
+    const val DATE = "date"
 }

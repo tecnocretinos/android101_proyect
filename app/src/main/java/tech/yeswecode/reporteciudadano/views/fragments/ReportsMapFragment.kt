@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import tech.yeswecode.reporteciudadano.R
@@ -95,6 +96,7 @@ class ReportsMapFragment : Fragment() {
 
     private fun getReports() {
         db.collection(FirestoreConstants.REPORTS)
+            .orderBy(FirestoreConstants.DATE, Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { result ->
                 var reportsTemp = ArrayList<Report>()

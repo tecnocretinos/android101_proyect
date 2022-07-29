@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import tech.yeswecode.reporteciudadano.databinding.FragmentReportsListBinding
@@ -55,6 +56,7 @@ class ReportsListFragment : Fragment() {
 
     private fun getReports() {
         db.collection(FirestoreConstants.REPORTS)
+            .orderBy(FirestoreConstants.DATE, Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 var reportsTemp = ArrayList<Report>()

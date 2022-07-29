@@ -22,10 +22,13 @@ import tech.yeswecode.reporteciudadano.databinding.ActivityNewReportBinding
 import tech.yeswecode.reporteciudadano.models.Report
 import tech.yeswecode.reporteciudadano.utilities.FirestoreConstants
 import tech.yeswecode.reporteciudadano.views.fragments.NewReportMapFragment
+import tech.yeswecode.reporteciudadano.views.fragments.OnLocationSet
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissionsResultCallback {
+class NewReportActivity : AppCompatActivity(),
+    ActivityCompat.OnRequestPermissionsResultCallback,
+    OnLocationSet {
 
     private val REQUEST_PERMISSION = 100
     private var imageUri: Uri? = null
@@ -33,6 +36,8 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
     private var _binding: ActivityNewReportBinding? = null
     private val binding get() = _binding!!
     private lateinit var mapFragment: NewReportMapFragment
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
 
     private val startCameraForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
@@ -53,6 +58,7 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         setContentView(binding.root)
 
         mapFragment = NewReportMapFragment.newInstance()
+        mapFragment.listener = this
         binding.addPicBtn.setOnClickListener {
             showOptionsDialog()
         }
@@ -118,8 +124,6 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         val image = ""
         val imageList = ArrayList<String>()
         imageList.add(image)
-        val longitude = 0.0
-        val latitude = 0.0
         if(title.isNotEmpty() && title.isNotBlank() && description.isNotEmpty() && description.isNotBlank()) {
             val report = Report(UUID.randomUUID().toString(),
                 title,
@@ -145,5 +149,10 @@ class NewReportActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         } else {
             // TODO: Show error
         }
+    }
+
+    override fun onLocationSet(lat: Double, long: Double) {
+        this.latitude = lat
+        this.longitude = long
     }
 }
